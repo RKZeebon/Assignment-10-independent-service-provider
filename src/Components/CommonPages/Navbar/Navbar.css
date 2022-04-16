@@ -52,7 +52,9 @@
         /* height: 100%; */
         z-index: 99;
         padding-left: 15px;
-        background-color: rgba(251, 146, 60, 0.5);
+        padding-bottom: 15px;
+        background-color: rgba(251, 146, 60, 0.8);
+
     }
 
     .nav-links-toggled a {

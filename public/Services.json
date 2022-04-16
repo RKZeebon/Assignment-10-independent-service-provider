@@ -1,0 +1,37 @@
+[
+    {
+        "id": 1,
+        "title": "Anniversary Photography.",
+        "price": 149.99,
+        "text": "I will capture your anniversary celebration moment for you.",
+        "img": "https://i.ibb.co/HN1JxR7/anniversary.jpg"
+    },
+    {
+        "id": 2,
+        "title": "Birthday Photography",
+        "price": 99.99,
+        "text": "I will capture your or your kid's birthday celebration moment for you.",
+        "img": "https://i.ibb.co/xLQktvr/birthday.jpg"
+    },
+    {
+        "id": 3,
+        "title": "Commercial Photography.",
+        "price": 499.99,
+        "text": "I can take photo of your products for advertisement.",
+        "img": "https://i.ibb.co/4R6thrH/commercial.jpg"
+    },
+    {
+        "id": 4,
+        "title": "Personal Photography",
+        "price": 49.99,
+        "text": "You can hire me for your persional photography.",
+        "img": "https://i.ibb.co/XbRMzh0/personal.jpg"
+    },
+    {
+        "id": 5,
+        "title": "Wedding Photography",
+        "price": 249.99,
+        "text": "You can hire me for your wedding photography.",
+        "img": "https://i.ibb.co/Ss63v7x/wedding.jpg"
+    }
+]

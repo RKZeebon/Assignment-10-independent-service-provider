@@ -1,8 +1,7 @@
 .banner-bg {
-    height: calc(100vh - 80px);
+    height: 850px;
     background-image: url(../../Assets/banner.jpg);
     background-position: center center;
     background-repeat: no-repeat;
-    background-attachment: fixed;
     background-size: cover;
 }
