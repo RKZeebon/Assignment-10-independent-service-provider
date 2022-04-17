@@ -9,7 +9,9 @@ module.exports = {
         'Anek': ['Anek Tamil', 'sans-serif']
       },
 
+
     },
+
   },
   plugins: [],
 }

@@ -1,11 +1,11 @@
 import React from 'react';
-import useServices from '../Hooks/UseServices';
+// import useServices from '../Hooks/UseServices';
 
 const Services = () => {
-    const { services } = useServices({})
+    // const { services } = useServices({})
     // console.log(services);
     return (
-        <div className='my-16'>
+        <div className='min-h-[850px]'>
             <h1>This is services</h1>
         </div>
     );
