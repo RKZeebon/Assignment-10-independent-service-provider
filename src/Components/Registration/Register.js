@@ -1,23 +1,47 @@
 import React, { useRef } from 'react';
 import Glogo from '../../Assets/g-logo.jpg'
-import Flogo from '../../Assets/f-logo.jpg'
-import { Link } from 'react-router-dom';
+import gitlogo from '../../Assets/GitHub.png'
+import { Link, useLocation, useNavigate, } from 'react-router-dom';
+import { useCreateUserWithEmailAndPassword, useSignInWithGithub, useSignInWithGoogle, useUpdateProfile } from 'react-firebase-hooks/auth';
+import auth from '../../firebase.init'
 
 const Register = () => {
     const nameRef = useRef('')
     const emailRef = useRef('')
     const passwordRef = useRef('')
     const confirmPassRef = useRef('')
-
-    const handleSignUp = event => {
+    const navigate = useNavigate()
+    const location = useLocation()
+    let from = location.state?.from?.pathname || "/";
+    const [
+        createUserWithEmailAndPassword,
+        user,
+        loading,
+        error,
+    ] = useCreateUserWithEmailAndPassword(auth);
+    const [updateProfile, updating] = useUpdateProfile(auth);
+    const [signInWithGoogle, gUser] = useSignInWithGoogle(auth);
+    const [signInWithGithub, gitUser] = useSignInWithGithub(auth);
+    if (loading || updating) {
+        return <p>Loding</p>
+    }
+    if (user || gUser || gitUser) {
+        navigate(from, { replace: true });
+    }
+    const handleSignUp = async event => {
         event.preventDefault();
         const name = nameRef.current.value;
         const email = emailRef.current.value;
         const password = passwordRef.current.value;
         const confirmPass = confirmPassRef.current.value;
 
-        console.log(name, email, password, confirmPass);
+        if (password === confirmPass) {
+            await createUserWithEmailAndPassword(email, password);
+            navigate('/')
+        }
+        await updateProfile({ displayName: name });
     }
+
     return (
         <div className='min-h-[850px]'>
             <div className='w-3/4 mx-auto'>
@@ -40,13 +64,13 @@ const Register = () => {
                 </div>
                 <div className='flex justify-center'>
                     <div className='w-full lg:w-1/4 block'>
-                        <div className='flex items-center justify-center border-black my-4 border-2 p-3 rounded-lg text-2xl font-semibold w-full cursor-pointer'>
+                        <div onClick={() => signInWithGoogle()} className='flex items-center justify-center border-black my-4 border-2 p-3 rounded-lg text-2xl font-semibold w-full cursor-pointer'>
                             <img className='w-12 mr-2' src={Glogo} alt="" />
                             <p>Sign in with Google</p>
                         </div>
-                        <div className='flex items-center justify-center border-black my-4 border-2 p-3 rounded-lg text-2xl font-semibold w-full cursor-pointer'>
-                            <img className='w-12 mr-2' src={Flogo} alt="" />
-                            <p>Sign in with Facebook</p>
+                        <div onClick={() => signInWithGithub()} className='flex items-center justify-center border-black my-4 border-2 p-3 rounded-lg text-2xl font-semibold w-full cursor-pointer'>
+                            <img className='w-12 mr-2' src={gitlogo} alt="" />
+                            <p>Sign in with Github</p>
                         </div>
 
                     </div>

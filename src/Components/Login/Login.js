@@ -1,17 +1,37 @@
 import React, { useRef } from 'react';
 import Glogo from '../../Assets/g-logo.jpg'
-import Flogo from '../../Assets/f-logo.jpg'
-import { Link } from 'react-router-dom';
+import gitlogo from '../../Assets/GitHub.png'
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useSignInWithEmailAndPassword, useSignInWithGithub, useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import auth from '../../firebase.init';
+
 const Login = () => {
+    const navigate = useNavigate()
     const emailRef = useRef('')
     const passwordRef = useRef('')
+    const location = useLocation()
+    let from = location.state?.from?.pathname || "/";
 
+    const [
+        signInWithEmailAndPassword,
+        user,
+        loading,
+        error,
+    ] = useSignInWithEmailAndPassword(auth);
+    const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
+    const [signInWithGithub, gitUser, gitLoading, gitError] = useSignInWithGithub(auth);
+    if (loading) {
+        return <p>Loading...</p>;
+    }
+    if (user || gUser || gitUser) {
+        navigate(from, { replace: true });
+    }
     const handleLogin = event => {
         event.preventDefault();
         const email = emailRef.current.value;
         const password = passwordRef.current.value;
 
-        console.log(email, password);
+        signInWithEmailAndPassword(email, password)
     }
     return (
         <div className='min-h-[850px]'>
@@ -33,13 +53,13 @@ const Login = () => {
                 </div>
                 <div className='flex justify-center'>
                     <div className='w-full lg:w-1/4 block'>
-                        <div className='flex items-center justify-center border-black my-4 border-2 p-3 rounded-lg text-2xl font-semibold w-full cursor-pointer'>
+                        <div onClick={() => signInWithGoogle()} className='flex items-center justify-center border-black my-4 border-2 p-3 rounded-lg text-2xl font-semibold w-full cursor-pointer'>
                             <img className='w-12 mr-2' src={Glogo} alt="" />
                             <p>Sign in with Google</p>
                         </div>
-                        <div className='flex items-center justify-center border-black my-4 border-2 p-3 rounded-lg text-2xl font-semibold w-full cursor-pointer'>
-                            <img className='w-12 mr-2' src={Flogo} alt="" />
-                            <p>Sign in with Facebook</p>
+                        <div onClick={() => signInWithGithub()} className='flex items-center justify-center border-black my-4 border-2 p-3 rounded-lg text-2xl font-semibold w-full cursor-pointer'>
+                            <img className='w-12 mr-2' src={gitlogo} alt="" />
+                            <p>Sign in with Github</p>
                         </div>
 
                     </div>

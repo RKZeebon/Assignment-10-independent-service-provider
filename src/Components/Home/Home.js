@@ -25,7 +25,7 @@ const Home = () => {
                     }
                 </div>
                 <div className='mt-8 text-center text-4xl text-orange-600'>
-                    <button className='font-semibold font-Anek hover:underline' onClick={() => navigate('/services')}>See all services➟</button >
+                    <button className='font-semibold font-Anek hover:underline' onClick={() => navigate('/services')}>See all Services➟</button >
                 </div>
             </div>
             <ReachMe />
