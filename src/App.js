@@ -8,6 +8,8 @@ import Footer from './Components/CommonPages/Footer/Footer';
 import NothingFound from './Components/NothingFound/NothingFound';
 import Login from './Components/Login/Login';
 import Register from './Components/Registration/Register';
+import Blogs from './Components/Blogs/Blogs';
+import About from './Components/About/About';
 
 function App() {
   return (
@@ -18,6 +20,8 @@ function App() {
         <Route path='/home' element={<Home />}></Route>
         <Route path='/services' element={<Services />}></Route>
         <Route path='/checkout' element={<Checkout />}></Route>
+        <Route path='/blogs' element={<Blogs />}></Route>
+        <Route path='/about' element={<About />}></Route>
         <Route path='/login' element={<Login />}></Route>
         <Route path='/register' element={<Register />}></Route>
         <Route path='*' element={<NothingFound />}></Route>
