@@ -14,6 +14,9 @@ const Login = () => {
     const passwordRef = useRef('')
     const location = useLocation()
     let from = location.state?.from?.pathname || "/";
+    let errorMessage;
+    let socialError;
+
 
     const [
         signInWithEmailAndPassword,
@@ -24,11 +27,31 @@ const Login = () => {
 
     const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
     const [signInWithGithub, gitUser, gitLoading, gitError] = useSignInWithGithub(auth);
-    const [sendPasswordResetEmail, sending] = useSendPasswordResetEmail(auth);
+    const [sendPasswordResetEmail] = useSendPasswordResetEmail(auth);
+    if (error) {
+        errorMessage = <div>
+            <p className='text-red-600'>Error: {error.message}</p>
+        </div>
+        socialError = '';
+
+    }
+
+    if (gError) {
+        socialError = <div>
+            <p className='text-red-600 font-bold'>Error: {gError.message}</p>
+        </div>
+        errorMessage = '';
+    }
+
+    if (gitError) {
+        socialError = <div>
+            <p className='text-red-600 font-bold'>Error: {gitError.message}</p>
+        </div>
+        errorMessage = '';
+    }
 
 
-
-    if (loading) {
+    if (loading || gLoading || gitLoading) {
         return (
             <Loading />
         );
@@ -49,7 +72,6 @@ const Login = () => {
         const email = emailRef.current.value;
 
         if (email) {
-            console.log(email);
             await sendPasswordResetEmail(email);
             toast('Email sent');
         }
@@ -66,11 +88,12 @@ const Login = () => {
                     <form onSubmit={handleLogin} action="" className='w-full lg:w-1/4 block'>
                         <input className='border-black my-4 border-2 block p-3 rounded-lg text-2xl w-full' ref={emailRef} type="email" name="email" placeholder='Your email' required />
                         <input className='border-black my-4 border-2 block p-3 rounded-lg text-2xl w-full' ref={passwordRef} type="password" name="password" placeholder="Password" required />
+                        {errorMessage}
                         <input className='my-4 block p-3 rounded-lg w-full bg-orange-400 text-2xl font-Anek font-semibold cursor-pointer' type="submit" value="Log in" />
                     </form>
 
                 </div>
-                <h3 className='text-center text-xl'>New here? <Link className='underline text-purple-600 font-bold hover:text-black' to='/register'>Sign up</Link></h3>
+                <h3 className='text-center text-xl'>New Here? <Link className='underline text-purple-600 font-bold hover:text-black' to='/register'>Sign up</Link></h3>
 
                 <h3 className='text-center text-xl mt-4'>Forget Password? <button onClick={resetPass} className='underline text-purple-600 font-bold hover:text-black'>Reset Password</button></h3>
                 <ToastContainer />
@@ -81,6 +104,7 @@ const Login = () => {
                 </div>
                 <div className='flex justify-center'>
                     <div className='w-full lg:w-1/4 block'>
+                        {socialError}
                         <div onClick={() => signInWithGoogle()} className='flex items-center justify-center border-black my-4 border-2 p-3 rounded-lg text-2xl font-semibold w-full cursor-pointer'>
                             <img className='w-12 mr-2' src={Glogo} alt="" />
                             <p>Sign in with Google</p>

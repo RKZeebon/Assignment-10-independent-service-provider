@@ -14,23 +14,43 @@ const Register = () => {
     const navigate = useNavigate()
     const location = useLocation()
     let from = location.state?.from?.pathname || "/";
+    let socialError;
+
+
     const [
         createUserWithEmailAndPassword,
         user,
         loading,
-        error,
     ] = useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
+
     const [updateProfile, updating] = useUpdateProfile(auth);
-    const [signInWithGoogle, gUser] = useSignInWithGoogle(auth);
-    const [signInWithGithub, gitUser] = useSignInWithGithub(auth);
-    if (loading || updating) {
+    const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
+    const [signInWithGithub, gitUser, gitLoading, gitError] = useSignInWithGithub(auth);
+
+    if (gError) {
+        socialError = <div>
+            <p className='text-red-600 font-bold'>Error: {gError.message}</p>
+        </div>
+
+    }
+
+    if (gitError) {
+        socialError = <div>
+            <p className='text-red-600 font-bold'>Error: {gitError.message}</p>
+        </div>
+
+    }
+
+    if (loading || gLoading || gitLoading || updating) {
         return (
             <Loading />
         )
     }
+
     if (user || gUser || gitUser) {
         navigate(from, { replace: true });
     }
+
     const handleSignUp = async event => {
         event.preventDefault();
         const name = nameRef.current.value;
@@ -67,6 +87,7 @@ const Register = () => {
                 </div>
                 <div className='flex justify-center'>
                     <div className='w-full lg:w-1/4 block'>
+                        {socialError}
                         <div onClick={() => signInWithGoogle()} className='flex items-center justify-center border-black my-4 border-2 p-3 rounded-lg text-2xl font-semibold w-full cursor-pointer'>
                             <img className='w-12 mr-2' src={Glogo} alt="" />
                             <p>Sign in with Google</p>
