@@ -18,7 +18,7 @@ const Register = () => {
         user,
         loading,
         error,
-    ] = useCreateUserWithEmailAndPassword(auth);
+    ] = useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
     const [updateProfile, updating] = useUpdateProfile(auth);
     const [signInWithGoogle, gUser] = useSignInWithGoogle(auth);
     const [signInWithGithub, gitUser] = useSignInWithGithub(auth);
