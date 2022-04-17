@@ -7,6 +7,7 @@ import Checkout from './Components/Checkout/Checkout';
 import Footer from './Components/CommonPages/Footer/Footer';
 import NothingFound from './Components/NothingFound/NothingFound';
 import Login from './Components/Login/Login';
+import Register from './Components/Registration/Register';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path='/services' element={<Services />}></Route>
         <Route path='/checkout' element={<Checkout />}></Route>
         <Route path='/login' element={<Login />}></Route>
+        <Route path='/register' element={<Register />}></Route>
         <Route path='*' element={<NothingFound />}></Route>
       </Routes>
       <Footer />
