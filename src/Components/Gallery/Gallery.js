@@ -13,30 +13,30 @@ import photo8 from '../../Assets/Gallery/8.jpg'
 const Gallery = () => {
     return (
         <div className='w-5/6 lg:w-4/6 mx-auto'>
-            <h2 className='text-center text-orange-600 mb-8 text-4xl font-bold font-Anek'>Some of my work</h2>
-            <Carousel className='px-3' autoPlay interval="2500" transitionTime="1000">
-                <div className='h-[700px]'>
+            <h2 className='text-center text-orange-600 mb-4 text-4xl font-bold font-Anek'>Some of my work</h2>
+            <Carousel autoPlay interval="2500" transitionTime="1000">
+                <div className='max-h-[750px]'>
                     <img src={photo1} alt='' />
                 </div>
-                <div className='h-[700px]'>
+                <div className='max-h-[750px]'>
                     <img src={photo2} alt='' />
                 </div>
-                <div className='h-[700px]'>
+                <div className='max-h-[750px]'>
                     <img src={photo3} alt='' />
                 </div>
-                <div className='h-[700px]'>
+                <div className='max-h-[750px]'>
                     <img src={photo4} alt='' />
                 </div>
-                <div className='h-[700px]'>
+                <div className='max-h-[750px]'>
                     <img src={photo5} alt='' />
                 </div>
-                <div className='h-[700px]'>
+                <div className='max-h-[750px]'>
                     <img src={photo6} alt='' />
                 </div>
-                <div className='h-[700px]'>
+                <div className='max-h-[750px]'>
                     <img src={photo7} alt='' />
                 </div>
-                <div className='h-[700px]'>
+                <div className='max-h-[750px]'>
                     <img src={photo8} alt='' />
                 </div>
 
