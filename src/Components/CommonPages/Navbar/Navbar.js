@@ -15,7 +15,7 @@ const Navbar = () => {
     }
 
     return (
-        <nav className='flex items-center justify-between bg-orange-400 px-12 h-20'>
+        <nav className='flex items-center justify-between bg-orange-400 px-6 lg:px-12 h-20'>
             <Link to='/'><h1 className='whitespace-nowrap flex items-center text-3xl font-semibold font-poppins'>RKZ PHOT<img className='w-6' src={o} alt="" />GRAPHY</h1>
             </Link>
             <div className='toggler' onClick={() => setOpen(!open)}>
