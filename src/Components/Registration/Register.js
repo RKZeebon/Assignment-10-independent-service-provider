@@ -4,6 +4,7 @@ import gitlogo from '../../Assets/GitHub.png'
 import { Link, useLocation, useNavigate, } from 'react-router-dom';
 import { useCreateUserWithEmailAndPassword, useSignInWithGithub, useSignInWithGoogle, useUpdateProfile } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init'
+import Loading from '../Loading/Loading';
 
 const Register = () => {
     const nameRef = useRef('')
@@ -23,7 +24,9 @@ const Register = () => {
     const [signInWithGoogle, gUser] = useSignInWithGoogle(auth);
     const [signInWithGithub, gitUser] = useSignInWithGithub(auth);
     if (loading || updating) {
-        return <p>Loding</p>
+        return (
+            <Loading />
+        )
     }
     if (user || gUser || gitUser) {
         navigate(from, { replace: true });

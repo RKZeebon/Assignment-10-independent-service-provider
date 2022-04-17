@@ -2,8 +2,11 @@ import React, { useRef } from 'react';
 import Glogo from '../../Assets/g-logo.jpg'
 import gitlogo from '../../Assets/GitHub.png'
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { useSignInWithEmailAndPassword, useSignInWithGithub, useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import { useSendPasswordResetEmail, useSignInWithEmailAndPassword, useSignInWithGithub, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
+import Loading from '../Loading/Loading';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Login = () => {
     const navigate = useNavigate()
@@ -18,11 +21,19 @@ const Login = () => {
         loading,
         error,
     ] = useSignInWithEmailAndPassword(auth);
+
     const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
     const [signInWithGithub, gitUser, gitLoading, gitError] = useSignInWithGithub(auth);
+    const [sendPasswordResetEmail, sending] = useSendPasswordResetEmail(auth);
+
+
+
     if (loading) {
-        return <p>Loading...</p>;
+        return (
+            <Loading />
+        );
     }
+
     if (user || gUser || gitUser) {
         navigate(from, { replace: true });
     }
@@ -33,6 +44,20 @@ const Login = () => {
 
         signInWithEmailAndPassword(email, password)
     }
+
+    const resetPass = async () => {
+        const email = emailRef.current.value;
+
+        if (email) {
+            console.log(email);
+            await sendPasswordResetEmail(email);
+            toast('Email sent');
+        }
+        else {
+            toast('Please enter your email');
+        }
+    }
+
     return (
         <div className='min-h-[850px]'>
             <div className='w-3/4 mx-auto'>
@@ -46,6 +71,9 @@ const Login = () => {
 
                 </div>
                 <h3 className='text-center text-xl'>New here? <Link className='underline text-purple-600 font-bold hover:text-black' to='/register'>Sign up</Link></h3>
+
+                <h3 className='text-center text-xl mt-4'>Forget Password? <button onClick={resetPass} className='underline text-purple-600 font-bold hover:text-black'>Reset Password</button></h3>
+                <ToastContainer />
                 <div className='flex justify-center items-baseline my-8'>
                     <div className='bg-gray-500 h-1 w-56 lg:w-[180px]'></div>
                     <p className='mt-2 px-2'>Or</p>
