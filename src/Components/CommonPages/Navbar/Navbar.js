@@ -9,6 +9,10 @@ import { signOut } from 'firebase/auth';
 const Navbar = () => {
     const [open, setOpen] = useState(false)
     const [user] = useAuthState(auth)
+    const handleSignout = () => {
+        signOut(auth)
+        setOpen(false)
+    }
 
     return (
         <nav className='flex items-center justify-between bg-orange-400 px-12 h-20'>
@@ -20,13 +24,12 @@ const Navbar = () => {
             <div className={`${open ? 'nav-links-toggled' : 'nav-links'}`}>
                 <NavLink onClick={() => setOpen(false)} className={({ isActive }) => isActive ? 'active-nav-link' : 'nav-link'} to={'/home'}>Home</NavLink>
                 <NavLink onClick={() => setOpen(false)} className={({ isActive }) => isActive ? 'active-nav-link' : 'nav-link'} to={'/services'}>Services</NavLink>
-                <NavLink onClick={() => setOpen(false)} className={({ isActive }) => isActive ? 'active-nav-link' : 'nav-link'} to={'/checkout'}>Check Out</NavLink>
                 <NavLink onClick={() => setOpen(false)} className={({ isActive }) => isActive ? 'active-nav-link' : 'nav-link'} to={'/blogs'}>Blogs</NavLink>
                 <NavLink onClick={() => setOpen(false)} className={({ isActive }) => isActive ? 'active-nav-link' : 'nav-link'} to={'/about'}>About</NavLink>
 
                 {
                     user ?
-                        <NavLink onClick={() => signOut(auth)} className='nav-link' to={'/'}>Log Out</NavLink>
+                        <NavLink onClick={handleSignout} className='nav-link' to={'/'}>Log Out</NavLink>
                         :
                         <NavLink onClick={() => setOpen(false)} className={({ isActive }) => isActive ? 'active-nav-link' : 'nav-link'} to={'/login'}>Login</NavLink>
                 }

@@ -1,5 +1,6 @@
 import React from 'react';
 
+
 const Blogs = () => {
     return (
         <div className='min-h-[850px] grid grid-cols-1 lg:grid-cols-3 gap-10 p-10'>
@@ -20,7 +21,7 @@ const Blogs = () => {
             <div className='rounded-lg shadow-2xl shadow-orange-200 border-2 border-orange-200 p-5'>
                 <h1 className='text-2xl mb-2'>➤ What other services does `firebase` provide other than authentication?</h1>
                 <div>
-                    <p className='text-lg'> <span className='underline font-bold mr-2'>Ans:</span>Although we are using Firebase for athentications, ther are more use case of firebase. they are:</p>
+                    <p className='text-lg'> <span className='underline font-bold mr-2'>Ans:</span>Although we are using Firebase for athentications, there are more use case of firebase. they are:</p>
                     <ul className='pl-10'>
                         <li className='list-disc'>Create a great onboarding flow.</li>
                         <li className='list-disc'>Progressively roll out new features.</li>
