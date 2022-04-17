@@ -1,7 +1,8 @@
 import { useNavigate } from 'react-router-dom';
 import Banner from '../Banner/Banner';
+import Gallery from '../Gallery/Gallery';
 import useServices from '../Hooks/UseServices';
-import ReachMe from '../ReachMe/ReachMe';
+
 
 
 
@@ -28,7 +29,7 @@ const Home = () => {
                     <button className='font-semibold font-Anek hover:underline' onClick={() => navigate('/services')}>See all Services➟</button >
                 </div>
             </div>
-            <ReachMe />
+            <Gallery />
         </div>
     );
 };
