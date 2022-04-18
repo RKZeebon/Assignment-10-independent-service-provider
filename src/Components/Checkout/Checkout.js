@@ -7,7 +7,6 @@ const Checkout = () => {
     const { serviceId } = useParams()
     const [services] = useServices()
     const selectedService = services.find(service => service.id == serviceId)
-    console.log(selectedService);
     const handleCheckOut = event => {
         event.preventDefault()
         setSubmit(true)
